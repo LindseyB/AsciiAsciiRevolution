@@ -1,0 +1,42 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.7	//
+DC	Makefile	/^DC=gdc$/;"	m
+EXES	Makefile	/^EXES = \\$/;"	m
+EXE_DIR	Makefile	/^EXE_DIR=..\/demo\/exe$/;"	m
+IMPORTS	Makefile	/^IMPORTS=-I ~\/code\/ycurses\/modules\/$/;"	m
+LIBS	Makefile	/^LIBS=-lpanel -lncurses$/;"	m
+NCOLS	panel_browse.d	/^const int NCOLS = 40;$/;"	v
+NCOLS	panel_hide.d	/^const int NCOLS = 40;$/;"	v
+NCOLS	panel_resize.d	/^const int NCOLS = 40;$/;"	v
+NLINES	panel_browse.d	/^const int NLINES = 10;$/;"	v
+NLINES	panel_hide.d	/^const int NLINES = 10;$/;"	v
+NLINES	panel_resize.d	/^const int NLINES = 10;$/;"	v
+PANEL_DATA	panel_hide.d	/^struct PANEL_DATA {$/;"	s	file:
+PANEL_DATA	panel_resize.d	/^struct PANEL_DATA {$/;"	s	file:
+SRC_DIR	Makefile	/^SRC_DIR=.$/;"	m
+h	panel_resize.d	/^	int x, y, w, h;$/;"	m	struct:PANEL_DATA	file:
+hide	panel_hide.d	/^	int hide;	\/* true if panel is hidden *\/$/;"	m	struct:PANEL_DATA	file:
+init_wins	panel_browse.d	/^void init_wins(WINDOW **wins, int n)$/;"	f
+init_wins	panel_hide.d	/^void init_wins(WINDOW **wins, int n)$/;"	f
+init_wins	panel_resize.d	/^void init_wins(WINDOW **wins, int n)$/;"	f
+label	panel_resize.d	/^	char label[80]; $/;"	m	struct:PANEL_DATA	file:
+label_color	panel_resize.d	/^	int label_color;$/;"	m	struct:PANEL_DATA	file:
+main	panel_browse.d	/^int main()$/;"	f
+main	panel_hide.d	/^int main()$/;"	f
+main	panel_resize.d	/^int main()$/;"	f
+main	panel_simple.c	/^int main()$/;"	f
+next	panel_resize.d	/^	PANEL *next;$/;"	m	struct:PANEL_DATA	file:
+print_in_middle	panel_browse.d	/^void print_in_middle(WINDOW *win, int starty, int startx, int width, char[] string, chtype color)$/;"	f
+print_in_middle	panel_hide.d	/^void print_in_middle(WINDOW *win, int starty, int startx, int width, char[] string, chtype color)$/;"	f
+print_in_middle	panel_resize.d	/^void print_in_middle(WINDOW *win, int starty, int startx, int width, char *string, chtype color)$/;"	f
+set_user_ptrs	panel_resize.d	/^void set_user_ptrs(PANEL **panels, int n)$/;"	f
+w	panel_resize.d	/^	int x, y, w, h;$/;"	m	struct:PANEL_DATA	file:
+win_show	panel_browse.d	/^void win_show(WINDOW* win, char[] label, int label_color)$/;"	f
+win_show	panel_hide.d	/^void win_show(WINDOW *win, char[] label, int label_color)$/;"	f
+win_show	panel_resize.d	/^void win_show(WINDOW *win, char *label, int label_color)$/;"	f
+x	panel_resize.d	/^	int x, y, w, h;$/;"	m	struct:PANEL_DATA	file:
+y	panel_resize.d	/^	int x, y, w, h;$/;"	m	struct:PANEL_DATA	file:
