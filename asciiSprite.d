@@ -5,7 +5,7 @@ import ncurses;
 import tango.io.Stdout;
 import tango.io.stream.TextFile;
 
-class asciiSprite {
+class AsciiSprite {
 	int _x, _y;
 	char[][] _sprite;
 
@@ -17,6 +17,7 @@ class asciiSprite {
 		_y = y;
 
 		foreach(line; _spriteFile){
+			Stdout(line)();
 			_sprite ~= line;
 		}
 
@@ -30,17 +31,14 @@ class asciiSprite {
 	}
 	
 	void drawSprite(WINDOW* win) {
-		werase(win);
-
 		int y = _y;
-		
+				
 		foreach(line; _sprite){
-			setsyx(y,_x);
-			wprintw(win,toStringz(line));
+			move(y,_x);
+			waddstr(win,toStringz(line));
 			y++;
 		}
 
-		wrefresh(win);
 	}
 
 }

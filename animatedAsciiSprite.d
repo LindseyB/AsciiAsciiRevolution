@@ -5,7 +5,7 @@ import tango.io.stream.TextFile;
 
 import asciiSprite;
 
-class animatedAsciiSprite : asciiSprite {
+class AnimatedAsciiSprite : AsciiSprite {
 	char[][][] _animation;
 	int _frame;
 
@@ -15,15 +15,26 @@ class animatedAsciiSprite : asciiSprite {
 		super._x = x;
 		super._y = y;
 		
-		int i = 0;
+		bool firstLine = true;
+		char[][] newFrame;
 
 		foreach(line; _spriteFile){
 			if(line == "%"){
-				i++;
+				firstLine = true;
 			} else {
-				_animation[i] ~= line;
+				if(firstLine == true){
+					if(newFrame !is null){
+						_animation ~= newFrame;
+					}
+					firstLine = false;
+				   newFrame = null;
+				}
+				
+				newFrame ~= line;
 			}	
 		}
+
+		_animation ~= newFrame;
 
 		super._sprite = _animation[0];
 	}
