@@ -30,6 +30,7 @@ class animatedAsciiSprite : asciiSprite {
 
 	void nextFrame() {
 		_frame++;
+		_frame %= _animation.length;
 		super._sprite = _animation[_frame];
 	}
 }
