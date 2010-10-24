@@ -24,8 +24,10 @@ class ArrowSection {
 
 	TextFileInput chartFile;
 
-	int misses, good, great;
+	long misses, good, great;
 	
+	bool noMoreBeats;
+
 	this(char[] arrowFile) {
 		chartFile = new TextFileInput("arrow_charts/" ~ arrowFile);
 
@@ -100,6 +102,8 @@ class ArrowSection {
 				Beat* beat = new Beat;
 
 				char[] line = chartFile.next;
+
+				if(line is null){noMoreBeats = true;}
 
 				foreach(ch; line){
 					switch(ch){
