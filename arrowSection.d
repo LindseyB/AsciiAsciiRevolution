@@ -115,7 +115,7 @@ class ArrowSection {
 					
 				if(beats.length > beatsOnScreen){
 					// score Misses on dis
-					ubyte misses = beats[0].arrows ^ beats[0].inputs;
+					ubyte misses = beats[0].arrows & (~beats[0].inputs);
 					
 					misses += lut[misses];
 					
