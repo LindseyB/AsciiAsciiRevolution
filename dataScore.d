@@ -5,13 +5,17 @@ import ncurses;
 import tango.io.Stdout;
 import tango.util.Convert;
 
+import asciiSprite;
+
 class DataScore {
 	int _score;
 	char[] _title;
+	AsciiSprite _cron;
 
 	this(char[] title) {
 		_score = 0;
 		_title = title;
+		_cron = new AsciiSprite("graphics/cron-not-so-mini.txt", null, false, 52, 1); 
 	}
 
 	void increaseScore(int value) {
@@ -61,5 +65,7 @@ class DataScore {
 			move(5,i);
 			addch('#');
 		}
+
+		_cron.drawSprite();
 	}
 }
