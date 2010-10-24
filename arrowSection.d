@@ -10,18 +10,22 @@ import tango.math.random.Random;
 import asciiSprite;
 
 class ArrowSection {
-	AsciiSprite _frame, l, r, u, d;
+	AsciiSprite _frame, hit, l, r, u, d;
 	
 	double sleep;
 	
 	this() {
 		_frame = new AsciiSprite("graphics/arrow-frame.txt", null, true, 60, 0);
+		hit = new AsciiSprite("graphics/hit_it_now_bar.txt", null, true, 62, 5);
 		//l = new AsciiSprite("graphics/arrow-frame.txt", null, true, 60, 0);
 	}
 	
 	void draw() {
 		_frame.drawSprite();
 		// draw arrows and shit
+
+		hit.drawSprite();
+
 		
 		if(offset == 0){
 			// parse shite frum file, appendto arrows and drop top if required
