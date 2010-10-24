@@ -1,9 +1,9 @@
 module dancingMan;
 
 import animatedAsciiSprite;
+import types;
 
 class DancingMan {
-	enum Animate { DOWN, LEFT, MOONWALK, RIGHT, UP, YMCA }
 	AnimatedAsciiSprite[6] _animations;
 	Animate _curAnimation;
 
