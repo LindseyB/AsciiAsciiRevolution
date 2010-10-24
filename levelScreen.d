@@ -63,8 +63,8 @@ class LevelScreen {
 
 	void endGame(bool win) {
 		_playing = false;
-		AsciiSprite winText = new AsciiSprite("graphics/victory.txt", null, true, 15, 15); 		
-		AsciiSprite loseText = new AsciiSprite("graphics/failure.txt", null, true, 15, 15); 		
+		AsciiSprite winText = new AsciiSprite("graphics/victory.txt", null, false, 62, 15); 		
+		AsciiSprite loseText = new AsciiSprite("graphics/failure.txt", null, false, 62, 15); 		
 		
 		if(win){
 			winText.drawSprite();
