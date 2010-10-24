@@ -20,6 +20,8 @@ SelectScreen selectS;
 LevelScreen levelS;
 SoundClip sc;
 
+bool userquit = false;
+bool playgame = true;
 void main(){
 	selectS = new SelectScreen("levels.txt");
 	sc = new SoundClip("sounds/title.mp3");	
@@ -40,27 +42,34 @@ void main(){
 	refresh();
 	logo.drawSprite();
 	refresh();
-
-	keypad(win, true);
-
+	
 	Thread.sleep(5);
-	
-	AnimatedAsciiSprite narwhal = new AnimatedAsciiSprite("graphics/man-moonwalk.txt", win, true, true, 16, 9);	
-	AsciiSprite light = new AsciiSprite("graphics/spotlight.txt", win, false, 0, 5);
-	
-	sc = new SoundClip("music/ID__Baobinga_-_10_-_Raise_Riddim.mp3");
-	sc.start();
-	if(!levelInput(selectS, win)){endwin();}
-	sc.stop();
-	
-	currentLevel = selectS._levels[selectS._selectedLevel];
-	levelS = new LevelScreen(currentLevel);
-	
-	Shitz shitzShitty = new Shitz(levelS, win);
-	Thread inputThread = new Thread(&shitzShitty.callMyShit);
-	inputThread.start();
 
-	drawLevelScreen();
+		
+	while(1){
+		keypad(win, true);
+		sc = new SoundClip("music/ID__Baobinga_-_10_-_Raise_Riddim.mp3");
+		sc.start();
+		//clear();
+		//refresh();
+		playgame = levelInput(selectS, win);
+		sc.stop();
+		if(!playgame){
+			break;
+		}
+			
+		currentLevel = selectS._levels[selectS._selectedLevel];
+		levelS = new LevelScreen(currentLevel);
+			
+		Shitz shitzShitty = new Shitz(levelS, win);
+		Thread inputThread = new Thread(&shitzShitty.callMyShit);
+		inputThread.start();
+
+		drawLevelScreen();
+
+		listenforkey = false;
+
+	}
 
 	endwin();
 }
@@ -72,7 +81,7 @@ void drawLevelScreen() {
 	sc.start();	
 
 	int count = 0;
-	while(levelS._playing){
+	while(levelS._playing && !userquit){
 		clear();
 		if(count%2 == 0){
 			levelS.draw(false);
@@ -85,5 +94,11 @@ void drawLevelScreen() {
 	}
 	
 	sc.stop();
+	
+	if(!userquit){
+		Thread.sleep(5);
+	}
+	clear();
+	refresh();
 
 }
