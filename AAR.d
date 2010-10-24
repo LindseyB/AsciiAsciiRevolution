@@ -11,7 +11,6 @@ import util.soundclip;
 import level;
 import selectScreen;
 import levelScreen;
-import dataScore;
 
 WINDOW* win;
 
@@ -21,7 +20,6 @@ LevelScreen levelS;
 
 void main(){
 	selectS = new SelectScreen("levels.txt");
-	levelS = new LevelScreen();
 	/*SoundClip sc = new SoundClip("music/ID__Baobinga_-_10_-_Raise_Riddim.mp3");
 	sc.start();
 	Thread.sleep(5);
@@ -81,6 +79,7 @@ void drawLevelSelect() {
 	}
 	
 	currentLevel = selectS._levels[selectS._levelSelected];
+	levelS = new LevelScreen(currentLevel._name);
 }
 
 void drawLevelScreen() {

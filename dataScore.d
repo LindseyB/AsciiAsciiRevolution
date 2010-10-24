@@ -40,14 +40,21 @@ class DataScore {
 
 		move(y,x);
 
-		addstr(toStringz(("#  Score: " ~ _score);
+		addstr(toStringz(("#  Score: " ~ to!(char)(_score))));
 
 		move(y,59);
 		addch('#');
 
+		for(int i=0; i<3; i++){
+			y++;
+			move(y,0);
+			addch('#');
+			move(y,59);
+			addch('#');
+		}
 	
-		for(int i=0; i<59; i++){
-			move(y,i);
+		for(int i=0; i<60; i++){
+			move(5,i);
 			addch('#');
 		}
 	}

@@ -10,8 +10,8 @@ class LevelScreen {
 	DataScore _score;
 	bool _playing;
 
-	this() {
-		_score = new DataScore("dummy title");
+	this(char[] title) {
+		_score = new DataScore(title);
 		_playing = true;
 	}
 
