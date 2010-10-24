@@ -10,12 +10,18 @@ import animatedAsciiSprite;
 import util.soundclip;
 import level;
 import selectScreen;
+import levelScreen;
+import dataScore;
 
 WINDOW* win;
 
 Level currentLevel;
+SelectScreen selectS;
+LevelScreen levelS;
 
 void main(){
+	selectS = new SelectScreen("levels.txt");
+	levelS = new LevelScreen();
 	/*SoundClip sc = new SoundClip("music/ID__Baobinga_-_10_-_Raise_Riddim.mp3");
 	sc.start();
 	Thread.sleep(5);
@@ -43,17 +49,11 @@ void main(){
 
 	AnimatedAsciiSprite narwhal = new AnimatedAsciiSprite("graphics/man-moonwalk.txt", win, true, 16, 9);	
 	AsciiSprite light = new AsciiSprite("graphics/spotlight.txt", win, false, 0, 5);
-	
-	SelectScreen screen = new SelectScreen("levels.txt");
 
-	while(!screen._levelSelected){
-		clear();
-		screen.drawScreen();
-		Thread.sleep(1);
-		refresh();
-	}
-
-	currentLevel = screen._levels[screen._levelSelected];
+	while(1){
+		drawLevelSelect();
+		drawLevelScreen();
+	}	
 
 	// game loop
 	for(int i=0; i<50; i++){
@@ -69,3 +69,25 @@ void main(){
 	endwin();
 }
 
+void drawLevelSelect() {
+	while(!selectS._levelSelected){
+		clear();
+		selectS.drawScreen();
+		Thread.sleep(1);
+		refresh();
+
+		// temporary until the keyboard commands are listened to.
+		selectS._levelSelected = true;
+	}
+	
+	currentLevel = selectS._levels[selectS._levelSelected];
+}
+
+void drawLevelScreen() {
+	while(levelS._playing){
+		clear();
+		levelS.draw();
+		Thread.sleep(0.3);
+		refresh();
+	}
+}
