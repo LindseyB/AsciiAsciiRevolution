@@ -50,7 +50,7 @@ class ArrowSection {
 		}
 
 		offset--;
-		if(offset < 0){offset = 3;}
+		if(offset < 0){offset = 4;}
 
 
 		// Draw
@@ -58,7 +58,7 @@ class ArrowSection {
 
 			ubyte arrows = beats[i].arrows;
 
-			int row = 1 + offset + 4*i;
+			int row = 1 + offset + 5*i;
 
 			// draw left arrow
 			if(arrows & 1){
@@ -89,7 +89,7 @@ class ArrowSection {
 
 private:
 	Beat*[] beats;
-	int beatsOnScreen = 5, offset;
+	int beatsOnScreen = 6, offset;
 
 	ubyte randomArrows(){
 		return rand.uniformR(16);
