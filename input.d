@@ -2,15 +2,10 @@ module input;
 
 import ncurses;
 import selectScreen;
+import levelScreen;
 import tango.core.Thread;
+import types;
 
-enum Key{
-	Enter = 10,
-		DownArrow = 258,
-		UpArrow = 259,
-		LeftArrow = 260,
-		RightArrow = 261
-}
 
 bool levelInput(SelectScreen screen, WINDOW* win){
 	int key;
@@ -40,3 +35,24 @@ bool levelInput(SelectScreen screen, WINDOW* win){
 	return true;
 }
 
+bool levelInput(LevelScreen screen, WINDOW* win){
+	int key;
+
+	clear();
+	
+	while((key = getch()) != ERR){
+		if(key == Key.UpArrow) {
+			screen._dancingMan.setCurAnimation(Animate.UP);
+		} else if (key == Key.DownArrow) {
+			screen._dancingMan.setCurAnimation(Animate.DOWN);
+		} else if (key == Key.LeftArrow) {
+			screen._dancingMan.setCurAnimation(Animate.LEFT);
+		} else if (key == Key.RightArrow) {
+			screen._dancingMan.setCurAnimation(Animate.RIGHT);
+		} else if (key == 'q') {
+			return false;
+		}
+
+		return true;
+	}	
+}
