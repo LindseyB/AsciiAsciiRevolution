@@ -26,22 +26,21 @@ class SelectScreen {
 
 		int i = 0;
 		foreach(line; levelsFile) {
-			if(i == 3){
-				i = 0;
-				Level l = new Level(audio, name, difficulty);
-				_levels ~= l;
-			} else if(i == 0) {
+			if(i == 0) {
 				audio = line;
+				i++;
 			} else if(i == 1) {
 				name = line;
+				i++;
 			} else if(i == 2) {
 				difficulty = to!(int)(line);
+				i = 0;
+				Level l = new Level(audio, name, difficulty);
+				_levels ~= l;	
 			} else {
 				// boo!
-				i--;
 			}
 			
-			i++;
 		}
 
 		_cron = new AsciiSprite("graphics/cron-mini.txt");
