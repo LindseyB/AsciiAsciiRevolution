@@ -15,7 +15,14 @@ void main()
 	noecho();
 	keypad(stdscr, true);
 
-	ch = getch();
+	while(1){
+		ch = getch();
+		
+		printw("The key pressed is %d\n", ch);
+		refresh();
+		if(ch == 'q'){
+			break;
+		}
+	}
 	endwin();
-	printf("The key pressed is %d\n", ch);
 }
