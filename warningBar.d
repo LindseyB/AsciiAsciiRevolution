@@ -20,11 +20,11 @@ class WarningBar {
 	}
 
 	void draw() {
-		move(0,120);
+		move(0,105);
 
 		for(int i=0; i<_level; i++){
 			addstr(toStringz("---"));
-			move(i,120);
+			move(i,105);
 		}
 	}
 }
