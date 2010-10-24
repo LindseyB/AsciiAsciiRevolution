@@ -24,6 +24,10 @@ class ArrowSection {
 		d = new AsciiSprite("graphics/arrow-down.txt", null, true, 71, 0);
 		u = new AsciiSprite("graphics/arrow-up.txt", null, true, 79, 0);
 		r = new AsciiSprite("graphics/arrow-right.txt", null, true, 87, 0);
+
+		for(int i = 0; i < beatsOnScreen; i++){
+			beats ~= new Beat;
+		}
 	}
 	
 	void draw() {
@@ -38,7 +42,7 @@ class ArrowSection {
 			Beat* beat = new Beat;
 
 			beat.arrows = randomArrows();
-			beat.period = 1.0;
+			beat.period = .1;
 
 			beats ~= beat;
 
@@ -46,7 +50,9 @@ class ArrowSection {
 				beats = beats[1..$];
 			}
 
-			sleep = beats[0].period;
+			if(beats[0].period != 0){
+				sleep = beats[0].period;
+			}
 		}
 
 		offset--;
