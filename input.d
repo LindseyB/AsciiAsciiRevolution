@@ -42,12 +42,16 @@ bool levelInput(LevelScreen screen, WINDOW* win){
 	
 	while((key = getch()) != ERR){
 		if(key == Key.UpArrow) {
+			screen._arrowSect._input |= 4;
 			screen._dancingMan.setCurAnimation(Animate.UP);
 		} else if (key == Key.DownArrow) {
+			screen._arrowSect._input |= 8;
 			screen._dancingMan.setCurAnimation(Animate.DOWN);
 		} else if (key == Key.LeftArrow) {
+			screen._arrowSect._input |= 1;
 			screen._dancingMan.setCurAnimation(Animate.LEFT);
 		} else if (key == Key.RightArrow) {
+			screen._arrowSect._input |= 2;
 			screen._dancingMan.setCurAnimation(Animate.RIGHT);
 		} else if (key == 'q') {
 			return false;

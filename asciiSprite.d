@@ -46,6 +46,10 @@ class AsciiSprite {
 		_x = x;
 		_y = y;
 	}
+
+	void setY(int y){
+		_y = y;
+	}
 	
 	void drawSprite() {
 		int y = _y;
