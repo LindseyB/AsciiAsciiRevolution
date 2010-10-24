@@ -64,61 +64,35 @@ class ArrowSection {
 		_frame.drawSprite();
 		// draw arrows and shit
 
+
+		bool first = false;
+
 		hit.drawSprite();
 
 		if(!fast){	
 			// XXX: atomic swap on _input
-			ubyte diff, cacheInput;// = _input; 
-			//_input = 0;
+			ubyte diff, cachedInput; 
 
-			cacheInput = llvm_atomic_swap!(ubyte)(&_input, 0);
-
-			//cacheInput = _input;
-			//_input = 0;
-			/*
-			asm{
-				push EDX;
-				push ECX;
-
-				mov EDX, 0;
-				mov ECX, input;
-				lock;
-				xchg [ECX], EDX;
-				mov ECX, cacheInput;
-				mov [ECX], EDX;
-
-				pop ECX;
-				pop EDX;
-				}*/
+			cachedInput = llvm_atomic_swap!(ubyte)(&_input, 0);
 
 			if(offset > 1){
-				//beats[0] arrows - inputs
-				diff = beats[0].arrows & (~beats[0].inputs);
-				
-				// diff & _input
-				diff &= cacheInput;
-				good += lut[diff];
-
-
-				// mark as not missed
-				beats[0].inputs |= diff;
+				if(beats[0].arrows == cachedInput){
+					good += lut[cachedInput];
+					beats[0].arrows = 0;
+					first = true;
+				}
 			}
 
-			if(offset < 3){
-				// _input - diff ==> inputs that counted above don't count twice
-				ubyte diff2 = cacheInput & (~diff);
+			if(offset < 3 && !first){
+				if(cachedInput == beats[1].arrows){
 				
-				// diff2 & beats[1].arrows
-				diff2 &= beats[1].arrows;
-				
-				if(offset == 0){
-					// beat[1] is on target at offset 0
-					great += lut[diff2];
-				}else{
-					good += lut[diff2];
-				}
-
-				beats[1].inputs |= diff2;
+					if(offset == 0){
+						great += lut[cachedInput];
+					}else{
+						good += lut[cachedInput];
+					}
+					beats[1].arrows = 0;
+				}				
 			}
 
 			if(offset == 0){
@@ -143,9 +117,7 @@ class ArrowSection {
 					
 				if(beats.length > beatsOnScreen){
 					// score Misses on dis
-					ubyte temp = beats[0].arrows & (~beats[0].inputs);
-					
-					misses += lut[temp];
+					misses += lut[beats[0].arrows];
 					
 					if(beats[0].end){noMoreBeats = true;}
 
@@ -208,6 +180,5 @@ private:
 struct Beat{
 	bool end;
 	ubyte arrows;	//lrud
-	ubyte inputs;
 	double period;
 }

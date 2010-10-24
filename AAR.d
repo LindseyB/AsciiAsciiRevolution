@@ -60,7 +60,8 @@ void main(){
 			
 		currentLevel = selectS._levels[selectS._selectedLevel];
 		levelS = new LevelScreen(currentLevel);
-			
+		
+		listenforkey = true;	
 		Shitz shitzShitty = new Shitz(levelS, win);
 		Thread inputThread = new Thread(&shitzShitty.callMyShit);
 		inputThread.start();
@@ -75,6 +76,7 @@ void main(){
 }
 
 void drawLevelScreen() {
+	userquit = false;
 	clear();
 
 	sc = new SoundClip("music/" ~ currentLevel._audio);

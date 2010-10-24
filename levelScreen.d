@@ -12,6 +12,7 @@ import asciiSprite;
 import narwhal;
 import backupDancer;
 import warningBar;
+import util.soundclip;
 
 class LevelScreen {
 	DataScore _score;
@@ -39,9 +40,9 @@ class LevelScreen {
 
 	void draw(bool fast) {
 		_score.setScore((-50*_arrowSect.misses) + (100*_arrowSect.good) + (200*_arrowSect.great)); 
-		_warningBar.updateWarningBar(_arrowSect.misses, (_arrowSect.good + _arrowSect.great));
+		_warningBar.updateWarningBar(_arrowSect.misses, _arrowSect.great);
 
-		if(_warningBar._level >= 32){
+		if(_warningBar._level >= 32 && _arrowSect.misses > 5){
 			endGame(false);
 		}
 
@@ -62,13 +63,18 @@ class LevelScreen {
 	}
 
 	void endGame(bool win) {
+		SoundClip sc;
 		_playing = false;
 		AsciiSprite winText = new AsciiSprite("graphics/victory.txt", null, false, 62, 15); 		
 		AsciiSprite loseText = new AsciiSprite("graphics/failure.txt", null, false, 62, 15); 		
 		
 		if(win){
+			sc = new SoundClip("sounds/win.mp3");
+			sc.start();
 			winText.drawSprite();
 		} else {
+			sc = new SoundClip("sounds/fail.mp3");
+			sc.start();
 			loseText.drawSprite();
 		}
 
