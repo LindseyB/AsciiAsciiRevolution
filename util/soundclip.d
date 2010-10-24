@@ -3,6 +3,7 @@ module util.soundclip;
 import tango.stdc.posix.unistd;
 import tango.stdc.posix.signal;
 import tango.stdc.stringz;
+import tango.std.posix.stdlib;
 
 class SoundClip{
 private:
@@ -13,6 +14,7 @@ private:
 
 public:
 	this(char[] fn){
+		exe = "cvlc";
 		filename = fn;
 		pid = 0;
 	}
@@ -22,8 +24,8 @@ public:
 
 		if((pid = fork()) == 0){
 			char[] temp = exe ~ filename;
-
-			execlp(toStringz(exe), toStringz(filename), cast(void*)null);
+			
+			execlp(toStringz(exe), toStringz(exe), toStringz(filename), cast(void*)null);
 
 		}else{
 			// ???
@@ -48,11 +50,11 @@ public:
 
 	bool pause(){
 		if(pid == 0 || paused){return false;}
-		return signal(SIGSTP);
+		return signal(SIGSTOP);
 	}
 
-	void unpause(){
-		if(pid == 0 || !paused){return false;}
+	bool unpause(){
+		if((pid == 0) || !paused){return false;}
 		return signal(SIGCONT);
 	}
 
