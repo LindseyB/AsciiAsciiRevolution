@@ -35,5 +35,6 @@ class LevelScreen {
 		_arrowSect.draw();
 		_dancingMan.draw();
 		_narwhal.animate();
+		_dancingMan.animate();
 	}	
 }
