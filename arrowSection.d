@@ -1,5 +1,7 @@
 module arrowSection;
 
+import ldc.intrinsics;
+
 import tango.stdc.stringz;
 import ncurses;
 import tango.io.Stdout;
@@ -31,14 +33,16 @@ class ArrowSection {
 	this(char[] arrowFile) {
 		chartFile = new TextFileInput("arrow_charts/" ~ arrowFile);
 
+		if(chartFile is null){ assert(false);_exit(1);}
+
 		auto bpm = chartFile.next;
 	
-		if(bpm[0..4] == "BPM:"){
-			sleep = 60.0 / to!(double)(bpm[4..$]);
-		}else{
+		//if(bpm[0..4] == "BPM:"){
+		sleep = 60.0 / to!(double)(bpm);
+			/*}else{
 			assert(false, "BAD arrowchart!");
 			_exit(1);
-		}
+			}*/
 
 		// burn the second line -- how long the song is
 		bpm = chartFile.next;
@@ -64,8 +68,28 @@ class ArrowSection {
 
 		if(!fast){	
 			// XXX: atomic swap on _input
-			ubyte diff, cacheInput = _input;
+			ubyte diff, cacheInput = _input; 
 			_input = 0;
+
+			//llvm_atomic_swap(&_input, cacheInput);
+
+			//cacheInput = _input;
+			//_input = 0;
+			/*
+			asm{
+				push EDX;
+				push ECX;
+
+				mov EDX, 0;
+				mov ECX, input;
+				lock;
+				xchg [ECX], EDX;
+				mov ECX, cacheInput;
+				mov [ECX], EDX;
+
+				pop ECX;
+				pop EDX;
+				}*/
 
 			if(offset > 1){
 				//beats[0] arrows - inputs
@@ -80,7 +104,7 @@ class ArrowSection {
 				beats[0].inputs |= diff;
 			}
 
-			if(offset > 3){
+			if(offset < 3){
 				// _input - diff ==> inputs that counted above don't count twice
 				ubyte diff2 = cacheInput & (~diff);
 				
@@ -119,9 +143,9 @@ class ArrowSection {
 					
 				if(beats.length > beatsOnScreen){
 					// score Misses on dis
-					misses = beats[0].arrows & (~beats[0].inputs);
+					ubyte temp = beats[0].arrows & (~beats[0].inputs);
 					
-					misses += lut[misses];
+					misses += lut[temp];
 					
 					if(beat[0].end){noMoreBeats = true;}
 
