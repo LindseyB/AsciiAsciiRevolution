@@ -3,14 +3,15 @@ module util.soundclip;
 import tango.stdc.posix.unistd;
 import tango.stdc.posix.signal;
 import tango.stdc.stringz;
-tango.sys.Process;
 //import tango.std.posix.stdlib;
+import tango.sys.Process;
+import tango.io.Stdout;
 
 class SoundClip{
 private:
 	char[] exe;
 	char[] filename;
-	//pid_t pid;
+	//pid_t pid 
 	bool paused;
 	Process p;
 
@@ -25,19 +26,20 @@ public:
 		if(p !is null){return false;}
 
 		//if((pid = fork()) == 0){
-		char[] temp = exe ~ filename;
+		char[] temp = exe ~ ' ' ~ filename;
 	
 		try{
 			p = new Process (temp, null);
 			p.copyEnv(true);
 
-			p.setRedirect(7);
+			p.setRedirect(Redirect.All);
 
 			p.execute;
 		}
-		catch (ProcessException e)
+		catch (Exception e){
 			Stdout.formatln ("Process execution failed: {}", e);
-
+			return false;
+		}
 			//execlp(toStringz(exe), toStringz(exe), toStringz(filename), cast(void*)null);
 
 		//}else{
@@ -49,6 +51,8 @@ public:
 			//	return false;
 			//}
 		//}
+
+		return true;
 	}
 
 	bool stop(){
