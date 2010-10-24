@@ -26,7 +26,7 @@ class ArrowSection {
 
 	TextFileInput chartFile;
 
-	long misses, good, great;
+	long misses, good, great, actualMisses;
 	
 	bool noMoreBeats;
 
@@ -117,7 +117,8 @@ class ArrowSection {
 					
 				if(beats.length > beatsOnScreen){
 					// score Misses on dis
-					misses += lut[beats[0].arrows];
+					misses++;
+					actualMisses += lut[beats[0].arrows];
 					
 					if(beats[0].end){noMoreBeats = true;}
 
