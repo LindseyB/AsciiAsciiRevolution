@@ -7,6 +7,8 @@ import tango.util.Convert;
 
 import tango.math.random.Random;
 
+import tango.io.stream.TextFile;
+
 import asciiSprite;
 
 class ArrowSection {
@@ -16,7 +18,19 @@ class ArrowSection {
 	
 	ubyte _input;
 
+	TextFileInput chartFile;
+
 	this() {
+		chartFile = new TextFileInput("arrow_charts/" ~ "anamanaguchi_flora_fauna" ~ ".txt");
+
+		auto bpm = chartFile.next;
+	
+		if(bpm[0..4] == "BPM:"){
+			sleep = 60.0 / to!(double)(bpm[4..$]);
+		}else{
+			assert(false, "BAD arrowchart!");
+		}
+
 		_frame = new AsciiSprite("graphics/arrow-frame.txt", null, true, 60, 0);
 		hit = new AsciiSprite("graphics/hit_it_now_bar.txt", null, true, 62, 5);
 
@@ -41,8 +55,20 @@ class ArrowSection {
 			// parse shite frum file, appendto arrows and drop top if required
 			Beat* beat = new Beat;
 
-			beat.arrows = randomArrows();
-			beat.period = .1;
+			char[] line = chartFile.next;
+
+			foreach(ch; line){
+				switch(ch){
+				case 'l': beat.arrows |= 1; break;
+				case 'r': beat.arrows |= 2; break;
+				case 'u': beat.arrows |= 4; break;
+				case 'd': beat.arrows |= 8; break;
+				case 'x':  break;
+				}
+			}
+			
+			//beat.arrows = randomArrows();
+			//beat.period = .1;
 
 			beats ~= beat;
 
@@ -50,9 +76,9 @@ class ArrowSection {
 				beats = beats[1..$];
 			}
 
-			if(beats[0].period != 0){
+			/*if(beats[0].period != 0){
 				sleep = beats[0].period;
-			}
+				}*/
 		}
 
 		offset--;
