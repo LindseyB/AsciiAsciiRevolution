@@ -45,6 +45,10 @@ class LevelScreen {
 			endGame(false);
 		}
 
+		if(_arrowSect.noMoreBeats){
+			endGame(true);
+		}
+
 		move(0,0);
 		_score.draw();
 		_warningBar.draw();
@@ -59,14 +63,15 @@ class LevelScreen {
 
 	void endGame(bool win) {
 		_playing = false;
+		AsciiSprite winText = new AsciiSprite("graphics/victory.txt", null, true, 15, 15); 		
+		AsciiSprite loseText = new AsciiSprite("graphics/failure.txt", null, true, 15, 15); 		
 		
-		
-		move(50,100);
 		if(win){
-			addstr(toStringz("You Win!"));
+			winText.drawSprite();
 		} else {
-			addstr(toStringz("You Lose!"));
+			loseText.drawSprite();
 		}
+
 	}
 
 }

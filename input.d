@@ -6,7 +6,9 @@ import levelScreen;
 import tango.core.Thread;
 import types;
 import tango.io.stream.TextFile;
+import AAR;
 
+bool listenforkey = true;
 
 bool levelInput(SelectScreen screen, WINDOW* win){
 	int key;
@@ -55,7 +57,7 @@ class Shitz {
 void levelInput(LevelScreen screen, WINDOW* win){
 	int key;
 	
-	while((key = getch()) != ERR){
+	while((key = getch()) != ERR && listenforkey){
 		if(key == Key.UpArrow) {
 			screen._arrowSect._input |= 4;
 			screen._dancingMan.setCurAnimation(Animate.UP);
@@ -69,6 +71,7 @@ void levelInput(LevelScreen screen, WINDOW* win){
 			screen._arrowSect._input |= 2;
 			screen._dancingMan.setCurAnimation(Animate.RIGHT);
 		} else if (key == 'q') {
+			userquit = true;
 			// do nothing.
 		}
 
