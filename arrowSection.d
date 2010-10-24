@@ -9,6 +9,10 @@ import tango.math.random.Random;
 
 import tango.io.stream.TextFile;
 
+import tango.stdc.posix.unistd;
+
+
+
 import asciiSprite;
 
 class ArrowSection {
@@ -29,6 +33,7 @@ class ArrowSection {
 			sleep = 60.0 / to!(double)(bpm[4..$]);
 		}else{
 			assert(false, "BAD arrowchart!");
+			_exit(1);
 		}
 
 		_frame = new AsciiSprite("graphics/arrow-frame.txt", null, true, 60, 0);

@@ -80,7 +80,7 @@ void drawLevelScreen() {
 			levelS.draw(true);
 		}
 		refresh();
-		Thread.sleep(levelS._arrowSect.sleep/5.0);
+		Thread.sleep(levelS._arrowSect.sleep/15.0);
 		count++;
 	}
 	
