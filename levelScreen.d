@@ -8,12 +8,14 @@ import dataScore;
 import arrowSection;
 import dancingMan;
 import asciiSprite;
+import narwhal;
 
 class LevelScreen {
 	DataScore _score;
 	ArrowSection _arrowSect;
 	DancingMan _dancingMan;
 	AsciiSprite _spotlight;
+	Narwhal _narwhal;
 
 	bool _playing;
 
@@ -23,6 +25,7 @@ class LevelScreen {
 		_dancingMan = new DancingMan();
 		_playing = true;
 		_spotlight = new AsciiSprite("graphics/spotlight.txt", null, false, 10, 18);
+		_narwhal = new Narwhal();
 	}
 
 	void draw() {
@@ -31,5 +34,6 @@ class LevelScreen {
 		_spotlight.drawSprite();
 		_arrowSect.draw();
 		_dancingMan.draw();
+		_narwhal.draw();
 	}	
 }

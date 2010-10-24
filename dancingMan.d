@@ -18,7 +18,7 @@ class DancingMan {
 		_animations[Animate.YMCA] = new AnimatedAsciiSprite("graphics/man-ymca.txt", null, true, 26, 22);
 	}
 
-	void setCurAnimation(Animate animation){
+	void setCurAnimation(Animate animation) {
 		_curAnimation = animation;
 	}
 
@@ -27,7 +27,7 @@ class DancingMan {
 		_animations[_curAnimation].nextFrame();
 	}
 
-	void draw(){
+	void draw() {
 		_animations[_curAnimation].drawSprite();
 	}
 }		
