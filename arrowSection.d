@@ -117,7 +117,7 @@ class ArrowSection {
 					
 				if(beats.length > beatsOnScreen){
 					// score Misses on dis
-					misses++;
+					if(beats[0].arrows != 0){misses++;}
 					actualMisses += lut[beats[0].arrows];
 					
 					if(beats[0].end){noMoreBeats = true;}
