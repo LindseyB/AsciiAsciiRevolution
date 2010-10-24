@@ -41,6 +41,14 @@ class LevelScreen {
 		_score.setScore((-50*_arrowSect.misses) + (100*_arrowSect.good) + (200*_arrowSect.great)); 
 		_warningBar.updateWarningBar(_arrowSect.misses, (_arrowSect.good + _arrowSect.great));
 
+		if(_warningBar._level >= 32){
+			endGame(false);
+		}
+
+		if(_arrowSect.noMoreBeats){
+			endGame(true);
+		}
+
 		move(0,0);
 		_score.draw();
 		_warningBar.draw();
@@ -51,6 +59,19 @@ class LevelScreen {
 		_dancingMan.animate();
 		_backup1.animate();
 		_backup2.animate();
+	}
+
+	void endGame(bool win) {
+		_playing = false;
+		AsciiSprite winText = new AsciiSprite("graphics/victory.txt", null, true, 15, 15); 		
+		AsciiSprite loseText = new AsciiSprite("graphics/failure.txt", null, true, 15, 15); 		
+		
+		if(win){
+			winText.drawSprite();
+		} else {
+			loseText.drawSprite();
+		}
+
 	}
 
 }
