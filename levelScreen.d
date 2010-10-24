@@ -62,7 +62,6 @@ class LevelScreen {
 		_dancingMan.animate();
 		_backup1.animate();
 		_backup2.animate();
-
 	}
 
 	void endGame(bool win) {
@@ -70,12 +69,21 @@ class LevelScreen {
 		_playing = false;
 		AsciiSprite winText = new AsciiSprite("graphics/victory.txt", null, false, 62, 15); 		
 		AsciiSprite loseText = new AsciiSprite("graphics/failure.txt", null, false, 62, 15); 		
-		
+		double grade;
+
+	   	if (_arrowSect.great + _arrowSect.good + _arrowSect.actualMisses != 0){
+			grade = 50 * ((_arrowSect.great*2 + _arrowSect.good)/(_arrowSect.great + _arrowSect.good + _arrowSect.actualMisses));  
+		} else {
+			grade = 0;
+		}
+
+		AsciiSprite gradeSprite = new AsciiSprite("graphics/" ~ getLetterGrade(grade) ~ ".txt", null, false, 73, 20); 
+
 		if(win){
 			sc = new SoundClip("sounds/win.mp3");
 			sc.start();
 			winText.drawSprite();
-			
+			gradeSprite.drawSprite();
 			AnimatedAsciiSprite popcorn = new AnimatedAsciiSprite("graphics/cron-popcron.txt", null, false, false, 20, 20);
 
 			for(int i=0; i<popcorn._animation.length; i++){
@@ -91,6 +99,20 @@ class LevelScreen {
 			loseText.drawSprite();
 		}
 
+	}
+
+	char getLetterGrade(double percent){
+		if(percent > 90.0) {
+			return 'A';
+		} else if(percent > 80.0) {
+			return 'B';
+		} else if(percent > 70.0) {
+			return 'C';
+		} else if(percent > 60.0) {
+			return 'D';
+		} else {
+			return 'F';
+		}
 	}
 
 }
