@@ -48,6 +48,10 @@ class SelectScreen {
 		_selector = new AsciiSprite("graphics/cron-selector.txt");
 	}
 
+	void setSelectedLevel(int selectedLevel) {
+		_selectedLevel = selectedLevel;
+	}
+
 	void drawScreen() {
 		int y = 10;
 		int x = 0;
