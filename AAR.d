@@ -38,12 +38,14 @@ clear();
 	Thread.sleep(5);
 
 
-	AnimatedAsciiSprite narwhal = new AnimatedAsciiSprite("graphics/narwhal-dance.txt", win);
-	
+	AnimatedAsciiSprite narwhal = new AnimatedAsciiSprite("graphics/man-moonwalk.txt", win, true, 16, 9);	
+	AsciiSprite light = new AsciiSprite("graphics/spotlight.txt", win, false, 0, 5);
+
 	// game loop
-	for(int i=0; i<5; i++){
+	for(int i=0; i<50; i++){
 		clear();
 		refresh();
+		light.drawSprite();
 		narwhal.drawSprite();
 		narwhal.nextFrame();
 		refresh();

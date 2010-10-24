@@ -9,12 +9,13 @@ class AnimatedAsciiSprite : AsciiSprite {
 	char[][][] _animation;
 	int _frame;
 
-	this(char[] filePath, WINDOW* win, int x=0, int y=0){
+	this(char[] filePath, WINDOW* win, bool transparent = false, int x=0, int y=0){
 		_frame = 0;
 		auto _spriteFile = new TextFileInput(filePath);
 		super._x = x;
 		super._y = y;
 		super._win = win;
+		super._transparent = transparent;
 		
 		bool firstLine = true;
 		char[][] newFrame;
