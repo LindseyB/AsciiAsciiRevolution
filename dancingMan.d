@@ -2,6 +2,8 @@ module dancingMan;
 
 import animatedAsciiSprite;
 import types;
+import ncurses;
+import tango.stdc.stringz;
 
 class DancingMan {
 	AnimatedAsciiSprite[6] _animations;
