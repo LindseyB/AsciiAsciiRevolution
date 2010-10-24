@@ -11,8 +11,12 @@ class WarningBar {
 		_level = 0;
 	}
 
-	void updateWarningBar(int misses, int successes){
-		_level += misses - successes;
+	void updateWarningBar(int misses, int great){
+		if(great == 0){
+			great = 1;
+		}
+
+		_level = cast(int)((cast(double)misses/(cast(double)great)) * 32.0);
 
 		if(_level > 32){
 			_level = 32;

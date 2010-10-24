@@ -13,7 +13,7 @@ video_challenge-random.txt
 Anamanaguchi_-_06_-_FloraFauna.mp3
 FloraFauna
 3
-flora_fauna-random.txt
+floral_fauna-random.txt
 Anamanaguchi_-_07_-_Power_Supply.mp3
 Power Supply
 7
