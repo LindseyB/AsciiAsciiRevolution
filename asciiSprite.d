@@ -27,10 +27,15 @@ class asciiSprite {
 		_y = y;
 	}
 	
-	void drawSprite() {
+	void drawSprite(WINDOW* win) {
+		werase(win);
+		setsyx(_y,_x);
+		
+		foreach(line; _sprite){
+			wprintw(win,toStringz(line));
+		}
 
+		wrefresh(win);
 	}
-
-
 
 }

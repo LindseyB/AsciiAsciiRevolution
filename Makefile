@@ -1,8 +1,5 @@
-FILES = asciiSprite.d
-
-
 all:
-	ldc $(FILES) -I~/tango/ -Iycurses/modules -d-version=Tango
+	rebuild AAR.d -oqobj -I~/tango/ -Iycurses/modules -L -lncurses -L -lncursesw -dc=ldc-posix-tango -version=Tango
 
 clean:
 	rm *.o
