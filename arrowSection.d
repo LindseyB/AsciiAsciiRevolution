@@ -20,6 +20,8 @@ class ArrowSection {
 
 	TextFileInput chartFile;
 
+	int misses, ok, good, great;
+	
 	this() {
 		chartFile = new TextFileInput("arrow_charts/" ~ "anamanaguchi_flora_fauna" ~ ".txt");
 
@@ -51,6 +53,8 @@ class ArrowSection {
 		hit.drawSprite();
 
 		if(!fast){	
+			
+
 				if(offset == 0){
 					// parse shite frum file, appendto arrows and drop top if required
 					Beat* beat = new Beat;
@@ -73,6 +77,11 @@ class ArrowSection {
 					beats ~= beat;
 
 					if(beats.length > beatsOnScreen){
+						// score Misses on dis
+						ubyte misses = beats[0].arrows ^ beats[0].inputs;
+
+						misses += lut[misses];
+						
 						beats = beats[1..$];
 					}
 
@@ -124,15 +133,18 @@ private:
 	int beatsOnScreen = 6, offset;
 
 	ubyte randomArrows(){
-		return rand.uniformR(17);
+		return rand.uniformR(16);
 	}
 
 	ubyte randomArrow(){
 		return (1 << rand.uniformR(4));
 	}
+
+	int[] lut = [0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4]; 
 }
 
 struct Beat{
 	ubyte arrows;	//lrud
+	ubyte inputs;
 	double period;
 }
