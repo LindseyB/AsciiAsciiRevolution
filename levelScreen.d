@@ -3,12 +3,14 @@ module levelScreen;
 import tango.stdc.stringz;
 import ncurses;
 import tango.io.Stdout; 
+import tango.core.Thread;
 
 import level;
 import dataScore;
 import arrowSection;
 import dancingMan;
 import asciiSprite;
+import animatedAsciiSprite;
 import narwhal;
 import backupDancer;
 import warningBar;
@@ -60,6 +62,7 @@ class LevelScreen {
 		_dancingMan.animate();
 		_backup1.animate();
 		_backup2.animate();
+
 	}
 
 	void endGame(bool win) {
@@ -72,6 +75,16 @@ class LevelScreen {
 			sc = new SoundClip("sounds/win.mp3");
 			sc.start();
 			winText.drawSprite();
+			
+			AnimatedAsciiSprite popcorn = new AnimatedAsciiSprite("graphics/cron-popcron.txt", null, false, false, 20, 20);
+
+			for(int i=0; i<popcorn._animation.length; i++){
+				popcorn.drawSprite();
+				popcorn.nextFrame();
+				refresh();
+				Thread.sleep(0.3);
+			}
+
 		} else {
 			sc = new SoundClip("sounds/fail.mp3");
 			sc.start();
