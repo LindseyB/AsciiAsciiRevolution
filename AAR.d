@@ -45,7 +45,7 @@ void main(){
 
 	Thread.sleep(5);
 	
-	AnimatedAsciiSprite narwhal = new AnimatedAsciiSprite("graphics/man-moonwalk.txt", win, true, 16, 9);	
+	AnimatedAsciiSprite narwhal = new AnimatedAsciiSprite("graphics/man-moonwalk.txt", win, true, true, 16, 9);	
 	AsciiSprite light = new AsciiSprite("graphics/spotlight.txt", win, false, 0, 5);
 	
 	sc = new SoundClip("music/ID__Baobinga_-_10_-_Raise_Riddim.mp3");
