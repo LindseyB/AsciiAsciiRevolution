@@ -28,6 +28,8 @@ bool levelInput(SelectScreen screen, WINDOW* win){
 			screen.up();
 		}else if(key == Key.DownArrow){
 			screen.down();
+		}else if(key == 'q'){
+			return false;
 		}
 
 		clear();
@@ -35,15 +37,6 @@ bool levelInput(SelectScreen screen, WINDOW* win){
 		refresh();
 	}
 
-	/*screen.down();
-
-	clear();
-	screen.drawScreen();
-	refresh();
-	
-	Thread.sleep(5);
-	screen.selectLevel();
-	*/
-
 	return true;
 }
+
