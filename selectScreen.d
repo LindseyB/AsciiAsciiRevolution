@@ -15,6 +15,7 @@ class SelectScreen {
 	AsciiSprite _cron;
 	AsciiSprite _title;
 	AsciiSprite _selector;
+	bool _levelSelected = false;
 
 	this(char[] levelsPath) {
 		auto levelsFile = new TextFileInput(levelsPath);
@@ -48,8 +49,25 @@ class SelectScreen {
 		_selector = new AsciiSprite("graphics/cron-selector.txt");
 	}
 
-	void setSelectedLevel(int selectedLevel) {
-		_selectedLevel = selectedLevel;
+	void down() {
+		_selectedLevel++;
+		
+		if(_selectedLevel > _levels.length-1){
+			_selectedLevel = 0;
+		}
+	}
+
+	void up() {
+		_selectedLevel--;
+
+		if(_selectedLevel < 0){
+			_selectedLevel = _levels.length-1;
+		}
+	}
+
+	void selectLevel() {
+		_levelSelected = true;
+		
 	}
 
 	void drawScreen() {

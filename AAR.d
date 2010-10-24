@@ -12,7 +12,8 @@ import level;
 import selectScreen;
 
 WINDOW* win;
-WINDOW* message;
+
+Level currentLevel;
 
 void main(){
 	/*SoundClip sc = new SoundClip("music/ID__Baobinga_-_10_-_Raise_Riddim.mp3");
@@ -45,12 +46,14 @@ void main(){
 	
 	SelectScreen screen = new SelectScreen("levels.txt");
 
-	while(1){
+	while(!screen._levelSelected){
 		clear();
 		screen.drawScreen();
 		Thread.sleep(1);
 		refresh();
 	}
+
+	currentLevel = screen._levels[screen._levelSelected];
 
 	// game loop
 	for(int i=0; i<50; i++){
@@ -65,6 +68,4 @@ void main(){
 
 	endwin();
 }
-
-
 
