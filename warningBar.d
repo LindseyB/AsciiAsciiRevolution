@@ -11,16 +11,16 @@ class WarningBar {
 		_level = 0;
 	}
 
-	void updateWarningBar(int misses, int succeses){
-		_level = _level - misses + successes;
+	void updateWarningBar(int misses, int successes){
+		_level += misses - successes;
 	}
 
 	void draw() {
-		move(127, 0);
+		move(0,120);
 
 		for(int i=0; i<_level; i++){
-			addstr("---");
-			move(127, i);
+			addstr(toStringz("---"));
+			move(i,120);
 		}
 	}
 }

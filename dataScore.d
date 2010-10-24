@@ -18,6 +18,10 @@ class DataScore {
 		_score += value;
 	}
 
+	void setScore(int value) {
+		_score = value;
+	}
+
 	void draw() {
 		int x = 0;
 		int y = 0;
@@ -40,7 +44,7 @@ class DataScore {
 
 		move(y,x);
 
-		addstr(toStringz(("#  Score: " ~ to!(char)(_score))));
+		addstr(toStringz(("#  Score: " ~ to!(char[])(_score))));
 
 		move(y,59);
 		addch('#');

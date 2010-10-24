@@ -38,7 +38,8 @@ class LevelScreen {
 	}
 
 	void draw(bool fast) {
-		updateWarningBar(_arrowSect.misses, _arrowSect.good+g_arrowSect.great);
+		_score.setScore((-50*_arrowSect.misses) + (100*_arrowSect.good) + (200*_arrowSect.great)); 
+		_warningBar.updateWarningBar(_arrowSect.misses, (_arrowSect.good + _arrowSect.great));
 
 		move(0,0);
 		_score.draw();
