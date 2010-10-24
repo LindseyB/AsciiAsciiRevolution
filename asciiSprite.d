@@ -9,6 +9,8 @@ class asciiSprite {
 	int _x, _y;
 	char[][] _sprite;
 
+	this(){}
+
 	this(char[] filePath, int x=0, int y=0) {
 		auto _spriteFile = new TextFileInput(filePath);
 		_x = x;
@@ -29,10 +31,13 @@ class asciiSprite {
 	
 	void drawSprite(WINDOW* win) {
 		werase(win);
-		setsyx(_y,_x);
+
+		int y = _y;
 		
 		foreach(line; _sprite){
+			setsyx(y,_x);
 			wprintw(win,toStringz(line));
+			y++;
 		}
 
 		wrefresh(win);
