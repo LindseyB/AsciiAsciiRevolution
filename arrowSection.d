@@ -147,7 +147,7 @@ class ArrowSection {
 					
 					misses += lut[temp];
 					
-					if(beat[0].end){noMoreBeats = true;}
+					if(beats[0].end){noMoreBeats = true;}
 
 					beats = beats[1..$];
 				}
