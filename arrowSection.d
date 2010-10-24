@@ -79,7 +79,7 @@ class ArrowSection {
 			}
 
 			if(offset > 3){
-				// _input - diff
+				// _input - diff ==> inputs that counted above don't count twice
 				ubyte diff2 = cacheInput & (~diff);
 				
 				// diff2 & beats[1].arrows
@@ -115,7 +115,7 @@ class ArrowSection {
 					
 				if(beats.length > beatsOnScreen){
 					// score Misses on dis
-					ubyte misses = beats[0].arrows & (~beats[0].inputs);
+					misses = beats[0].arrows & (~beats[0].inputs);
 					
 					misses += lut[misses];
 					
