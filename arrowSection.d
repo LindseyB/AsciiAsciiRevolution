@@ -9,6 +9,10 @@ import tango.math.random.Random;
 
 import tango.io.stream.TextFile;
 
+import tango.stdc.posix.unistd;
+
+
+
 import asciiSprite;
 
 class ArrowSection {
@@ -22,8 +26,8 @@ class ArrowSection {
 
 	int misses, ok, good, great;
 	
-	this() {
-		chartFile = new TextFileInput("arrow_charts/" ~ "anamanaguchi_flora_fauna" ~ ".txt");
+	this(char[] arrowFile) {
+		chartFile = new TextFileInput("arrow_charts/" ~ arrowFile);
 
 		auto bpm = chartFile.next;
 	
@@ -31,6 +35,7 @@ class ArrowSection {
 			sleep = 60.0 / to!(double)(bpm[4..$]);
 		}else{
 			assert(false, "BAD arrowchart!");
+			_exit(1);
 		}
 
 		_frame = new AsciiSprite("graphics/arrow-frame.txt", null, true, 60, 0);

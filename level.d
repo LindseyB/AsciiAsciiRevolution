@@ -3,12 +3,14 @@ module level;
 class Level {
 	char[] _audio;
 	char[] _name;
+	char[] _arrowChart;
 	int _difficulty;
 
-	this(char[] audio, char[] name, int difficulty) {
+	this(char[] audio, char[] name, int difficulty, char[] arrowChart) {
 		_audio = audio;
 		_name = name;
-		_difficulty = difficulty; 
+		_difficulty = difficulty;
+		_arrowChart = arrowChart;
 	}
 	
 	char[] getAudio() {

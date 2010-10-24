@@ -54,7 +54,7 @@ void main(){
 	sc.stop();
 	
 	currentLevel = selectS._levels[selectS._selectedLevel];
-	levelS = new LevelScreen(currentLevel._name);
+	levelS = new LevelScreen(currentLevel);
 	
 	Shitz shitzShitty = new Shitz(levelS, win);
 	Thread inputThread = new Thread(&shitzShitty.callMyShit);
@@ -74,13 +74,13 @@ void drawLevelScreen() {
 	int count = 0;
 	while(levelS._playing){
 		clear();
-		if(count%5 == 0){
+		if(count%2 == 0){
 			levelS.draw(false);
 		} else {
 			levelS.draw(true);
 		}
 		refresh();
-		Thread.sleep(levelS._arrowSect.sleep/5.0);
+		Thread.sleep(levelS._arrowSect.sleep/10.0);
 		count++;
 	}
 	

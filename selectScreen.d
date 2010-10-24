@@ -22,6 +22,7 @@ class SelectScreen {
 		
 		char[] audio;
 		char[] name;
+		char[] arrowChart;
 		int difficulty = -1;
 
 		int i = 0;
@@ -34,8 +35,11 @@ class SelectScreen {
 				i++;
 			} else if(i == 2) {
 				difficulty = to!(int)(line);
+				i++;
+			} else if(i == 3) {
+				arrowChart = line;
 				i = 0;
-				Level l = new Level(audio, name, difficulty);
+				Level l = new Level(audio, name, difficulty, arrowChart);
 				_levels ~= l;	
 			} else {
 				// boo!

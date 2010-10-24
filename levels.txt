@@ -1,15 +1,20 @@
 Anamanaguchi_-_02_-_Helix_Nebula.mp3
 Helix Nebula by Anamanaguchi
 5
+random.txt
 Anamanaguchi_-_03_-_Airbase.mp3
 Airbase by Anamanaguchi
 5
+anamanaguchi_flora_fauna.txt
 Anamanaguchi_-_04_-_Video_Challenge.mp3
 Video Challenge by Anamanaguchi
 5
+anamanaguchi_flora_fauna.txt
 Anamanaguchi_-_06_-_FloraFauna.mp3
 FloraFauna
 5
+anamanaguchi_flora_fauna.txt
 Anamanaguchi_-_07_-_Power_Supply.mp3
 Power Supply
 5
+anamanaguchi_flora_fauna.txt
