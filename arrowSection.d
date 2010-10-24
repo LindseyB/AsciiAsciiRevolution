@@ -24,8 +24,10 @@ class ArrowSection {
 
 	TextFileInput chartFile;
 
-	int misses, good, great;
+	long misses, good, great;
 	
+	bool noMoreBeats;
+
 	this(char[] arrowFile) {
 		chartFile = new TextFileInput("arrow_charts/" ~ arrowFile);
 
@@ -101,6 +103,8 @@ class ArrowSection {
 
 				char[] line = chartFile.next;
 
+				if(line is null){beat.end = true;}
+
 				foreach(ch; line){
 					switch(ch){
 					case 'l': beat.arrows |= 1; break;
@@ -119,6 +123,8 @@ class ArrowSection {
 					
 					misses += lut[misses];
 					
+					if(beat[0].end){noMoreBeats = true;}
+
 					beats = beats[1..$];
 				}
 			}
@@ -176,6 +182,7 @@ private:
 }
 
 struct Beat{
+	bool end;
 	ubyte arrows;	//lrud
 	ubyte inputs;
 	double period;

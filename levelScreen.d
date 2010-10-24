@@ -10,6 +10,8 @@ import arrowSection;
 import dancingMan;
 import asciiSprite;
 import narwhal;
+import backupDancer;
+import warningBar;
 
 class LevelScreen {
 	DataScore _score;
@@ -17,6 +19,9 @@ class LevelScreen {
 	DancingMan _dancingMan;
 	AsciiSprite _spotlight;
 	Narwhal _narwhal;
+	BackupDancer _backup1;
+	BackupDancer _backup2;
+	WarningBar _warningBar;
 
 	bool _playing;
 
@@ -24,19 +29,28 @@ class LevelScreen {
 		_score = new DataScore(currentLevel._name);
 		_arrowSect = new ArrowSection(currentLevel._arrowChart);
 		_dancingMan = new DancingMan();
+		_backup1 = new BackupDancer(20, 20);
+		_backup2 = new BackupDancer(32, 20);
 		_playing = true;
 		_spotlight = new AsciiSprite("graphics/spotlight.txt", null, false, 10, 18);
 		_narwhal = new Narwhal();
+		_warningBar = new WarningBar();
 	}
 
 	void draw(bool fast) {
+		_score.setScore((-50*_arrowSect.misses) + (100*_arrowSect.good) + (200*_arrowSect.great)); 
+		_warningBar.updateWarningBar(_arrowSect.misses, (_arrowSect.good + _arrowSect.great));
+
 		move(0,0);
 		_score.draw();
+		_warningBar.draw();
 		_spotlight.drawSprite();
 		_arrowSect.draw(fast);
 		_dancingMan.draw();
 		_narwhal.animate();
 		_dancingMan.animate();
+		_backup1.animate();
+		_backup2.animate();
 	}
 
 }

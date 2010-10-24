@@ -25,7 +25,7 @@ class Narwhal {
 	void animate() {
 		if(_animations[_curAnimation]._frame == _animations[_curAnimation]._animation.length - 1){
 			// switch animations?
-			if(_curAnimation == Animate.BREAKDANCE){
+			if(_curAnimation != Animate.DANCE){
 				_curAnimation = Animate.DANCE;
 			} else {
 				int random = rand.uniformR(20);
