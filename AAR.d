@@ -71,12 +71,17 @@ void drawLevelScreen() {
 	sc = new SoundClip("music/" ~ currentLevel._audio);
 	sc.start();	
 
+	int count = 0;
 	while(levelS._playing){
 		clear();
-		levelS.draw();
-		//Thread.sleep(0.05);
-		Thread.sleep(levelS._arrowSect.sleep);
+		if(count%5 == 0){
+			levelS.draw(false);
+		} else {
+			levelS.draw(true);
+		}
 		refresh();
+		Thread.sleep(levelS._arrowSect.sleep/5.0);
+		count++;
 	}
 	
 	sc.stop();

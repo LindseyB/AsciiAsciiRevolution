@@ -12,7 +12,7 @@ class AnimatedAsciiSprite : AsciiSprite {
 	bool _loop;
 	bool _animate;
 
-	this(char[] filePath, WINDOW* win, bool transparent = false, bool loop = false, int x=0, int y=0){
+	this(char[] filePath, WINDOW* win, bool transparent, bool loop, int x=0, int y=0){
 		_frame = 0;
 		auto _spriteFile = new TextFileInput(filePath);
 		super._x = x;
@@ -20,6 +20,7 @@ class AnimatedAsciiSprite : AsciiSprite {
 		super._win = win;
 		super._transparent = transparent;
 		_animate = true;
+		_loop = loop;
 
 		bool firstLine = true;
 		char[][] newFrame;
@@ -49,10 +50,10 @@ class AnimatedAsciiSprite : AsciiSprite {
 
 	void nextFrame() {
 		if(_animate){
-				int before = _frame++;
+				int before = ++_frame;
 				_frame %= _animation.length;
-
-				if(before == _animation.length && _frame == 0){
+				
+				if(!_loop && before == _animation.length && _frame == 0){
 					_animate = false;
 				}
 

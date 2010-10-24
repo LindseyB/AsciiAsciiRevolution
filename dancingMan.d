@@ -22,6 +22,7 @@ class DancingMan {
 
 	void setCurAnimation(Animate animation) {
 		_curAnimation = animation;
+		_animations[_curAnimation]._animate = true;
 	}
 
 	void animate() {

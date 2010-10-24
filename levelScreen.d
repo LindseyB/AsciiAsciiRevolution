@@ -28,13 +28,14 @@ class LevelScreen {
 		_narwhal = new Narwhal();
 	}
 
-	void draw() {
+	void draw(bool fast) {
 		move(0,0);
 		_score.draw();
 		_spotlight.drawSprite();
-		_arrowSect.draw();
+		_arrowSect.draw(fast);
 		_dancingMan.draw();
 		_narwhal.animate();
 		_dancingMan.animate();
-	}	
+	}
+
 }

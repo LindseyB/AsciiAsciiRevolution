@@ -44,46 +44,46 @@ class ArrowSection {
 		}
 	}
 	
-	void draw() {
+	void draw(bool fast) {
 		_frame.drawSprite();
 		// draw arrows and shit
 
 		hit.drawSprite();
 
-		
-		if(offset == 0){
-			// parse shite frum file, appendto arrows and drop top if required
-			Beat* beat = new Beat;
+		if(!fast){	
+				if(offset == 0){
+					// parse shite frum file, appendto arrows and drop top if required
+					Beat* beat = new Beat;
 
-			char[] line = chartFile.next;
+					char[] line = chartFile.next;
 
-			foreach(ch; line){
-				switch(ch){
-				case 'l': beat.arrows |= 1; break;
-				case 'r': beat.arrows |= 2; break;
-				case 'u': beat.arrows |= 4; break;
-				case 'd': beat.arrows |= 8; break;
-				case 'x':  break;
+					foreach(ch; line){
+						switch(ch){
+						case 'l': beat.arrows |= 1; break;
+						case 'r': beat.arrows |= 2; break;
+						case 'u': beat.arrows |= 4; break;
+						case 'd': beat.arrows |= 8; break;
+						case 'x':  break;
+						}
+					}
+					
+					//beat.arrows = randomArrows();
+					//beat.period = .1;
+
+					beats ~= beat;
+
+					if(beats.length > beatsOnScreen){
+						beats = beats[1..$];
+					}
+
+					/*if(beats[0].period != 0){
+						sleep = beats[0].period;
+						}*/
 				}
-			}
-			
-			//beat.arrows = randomArrows();
-			//beat.period = .1;
 
-			beats ~= beat;
-
-			if(beats.length > beatsOnScreen){
-				beats = beats[1..$];
-			}
-
-			/*if(beats[0].period != 0){
-				sleep = beats[0].period;
-				}*/
+				offset--;
+				if(offset < 0){offset = 4;}
 		}
-
-		offset--;
-		if(offset < 0){offset = 4;}
-
 
 		// Draw
 		for(int i = 0; i < beats.length; i++){
