@@ -4,62 +4,89 @@ import tango.stdc.posix.unistd;
 import tango.stdc.posix.signal;
 import tango.stdc.stringz;
 //import tango.std.posix.stdlib;
+import tango.sys.Process;
+import tango.io.Stdout;
 
 class SoundClip{
 private:
 	char[] exe;
 	char[] filename;
-	pid_t pid;
+	//pid_t pid 
 	bool paused;
+	Process p;
+
 
 public:
 	this(char[] fn){
 		exe = "cvlc";
 		filename = fn;
-		pid = 0;
 	}
 
 	bool start(){
-		if(pid != 0){return false;}
+		if(p !is null){return false;}
 
-		if((pid = fork()) == 0){
-			char[] temp = exe ~ filename;
-			
-			execlp(toStringz(exe), toStringz(exe), toStringz(filename), cast(void*)null);
+		//if((pid = fork()) == 0){
+		char[] temp = exe ~ ' ' ~ filename;
+	
+		try{
+			p = new Process (temp, null);
+			p.copyEnv(true);
 
-		}else{
-			// ???
-			if(pid > 0){
-			
-				return true;
-			}else{
-				return false;
-			}
+			p.setRedirect(Redirect.All);
+
+			p.execute;
 		}
+		catch (Exception e){
+			Stdout.formatln ("Process execution failed: {}", e);
+			return false;
+		}
+			//execlp(toStringz(exe), toStringz(exe), toStringz(filename), cast(void*)null);
+
+		//}else{
+			// ???
+			//if(pid > 0){
+			
+			//	return true;
+			//}else{
+			//	return false;
+			//}
+		//}
+
+		return true;
 	}
 
 	bool stop(){
-		if(pid == 0){return false;}
+		if(p is null){return false;}
 
-		if(kill(pid, SIGKILL) != 0){return false;}
+		//if(kill(pid, SIGKILL) != 0){return false;}
 
 		//XXX: wait for child zombie
+
+		p.kill();
+
+		//auto result = p.wait;
+		
+    //Stdout.formatln ("Process '{}' ({}) exited with reason {}, status {}",
+    //                 p.programName, p.pid, cast(int) result.reason, result.status);
+
 
 		return true;
 	}
 
 	bool pause(){
-		if(pid == 0 || paused){return false;}
+		if(p !is null || paused){return false;}
+
 		return signal(SIGSTOP);
 	}
 
 	bool unpause(){
-		if((pid == 0) || !paused){return false;}
+		if((p !is null) || !paused){return false;}
+
 		return signal(SIGCONT);
 	}
 
 
 	bool signal(int sig){
-		return (kill(pid, sig) == 0);
+		return (kill(p.pid, sig) == 0);
 	}
 }
