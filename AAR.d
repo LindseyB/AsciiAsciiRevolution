@@ -10,6 +10,7 @@ import animatedAsciiSprite;
 import util.soundclip;
 import level;
 import selectScreen;
+import input;
 import levelScreen;
 
 WINDOW* win;
@@ -41,50 +42,28 @@ void main(){
 	logo.drawSprite();
 	refresh();
 
+	keypad(win, true);
 
 	Thread.sleep(5);
 	
-
 	AnimatedAsciiSprite narwhal = new AnimatedAsciiSprite("graphics/man-moonwalk.txt", win, true, 16, 9);	
 	AsciiSprite light = new AsciiSprite("graphics/spotlight.txt", win, false, 0, 5);
 
-	while(1){
-		drawLevelSelect();
-		drawLevelScreen();
-	}	
-
-	// game loop
-	for(int i=0; i<50; i++){
-		clear();
-		refresh();
-		light.drawSprite();
-		narwhal.drawSprite();
-		narwhal.nextFrame();
-		refresh();
-		Thread.sleep(1);
-	}
-
-	endwin();
-}
-
-void drawLevelSelect() {
-	while(!selectS._levelSelected){
-		clear();
-		selectS.drawScreen();
-		Thread.sleep(1);
-		refresh();
-
-		// temporary until the keyboard commands are listened to.
-		selectS._levelSelected = true;
-	}
+	if(!levelInput(selectS, win)){goto ragequite;}
 	
 	currentLevel = selectS._levels[selectS._levelSelected];
 	levelS = new LevelScreen(currentLevel._name);
+
+	drawLevelScreen();
+
+ ragequite:
+	endwin();
 }
 
 void drawLevelScreen() {
+	clear();
+	
 	while(levelS._playing){
-		clear();
 		levelS.draw();
 		Thread.sleep(0.3);
 		refresh();
