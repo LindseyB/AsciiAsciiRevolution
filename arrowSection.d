@@ -68,7 +68,7 @@ class ArrowSection {
 						case 'r': beat.arrows |= 2; break;
 						case 'u': beat.arrows |= 4; break;
 						case 'd': beat.arrows |= 8; break;
-						case 'x':  break;
+						case 'x': beat.arrows |= randomArrow(); break;
 						}
 					}
 					
@@ -129,7 +129,11 @@ private:
 	int beatsOnScreen = 6, offset;
 
 	ubyte randomArrows(){
-		return rand.uniformR(16);
+		return rand.uniformR(17);
+	}
+
+	ubyte randomArrow(){
+		return (1 << rand.uniformR(4));
 	}
 }
 
