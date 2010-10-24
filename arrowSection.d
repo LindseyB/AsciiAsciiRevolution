@@ -20,8 +20,8 @@ class ArrowSection {
 
 	TextFileInput chartFile;
 
-	this() {
-		chartFile = new TextFileInput("arrow_charts/" ~ "anamanaguchi_flora_fauna" ~ ".txt");
+	this(char[] arrowFile) {
+		chartFile = new TextFileInput("arrow_charts/" ~ arrowFile);
 
 		auto bpm = chartFile.next;
 	

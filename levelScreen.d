@@ -4,6 +4,7 @@ import tango.stdc.stringz;
 import ncurses;
 import tango.io.Stdout; 
 
+import level;
 import dataScore;
 import arrowSection;
 import dancingMan;
@@ -19,9 +20,9 @@ class LevelScreen {
 
 	bool _playing;
 
-	this(char[] title) {
-		_score = new DataScore(title);
-		_arrowSect = new ArrowSection();
+	this(Level currentLevel) {
+		_score = new DataScore(currentLevel._name);
+		_arrowSect = new ArrowSection(currentLevel._arrowChart);
 		_dancingMan = new DancingMan();
 		_playing = true;
 		_spotlight = new AsciiSprite("graphics/spotlight.txt", null, false, 10, 18);

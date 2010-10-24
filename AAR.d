@@ -54,7 +54,7 @@ void main(){
 	sc.stop();
 	
 	currentLevel = selectS._levels[selectS._selectedLevel];
-	levelS = new LevelScreen(currentLevel._name);
+	levelS = new LevelScreen(currentLevel);
 	
 	Shitz shitzShitty = new Shitz(levelS, win);
 	Thread inputThread = new Thread(&shitzShitty.callMyShit);
