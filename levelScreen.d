@@ -34,6 +34,6 @@ class LevelScreen {
 		_spotlight.drawSprite();
 		_arrowSect.draw();
 		_dancingMan.draw();
-		_narwhal.draw();
+		_narwhal.animate();
 	}	
 }
