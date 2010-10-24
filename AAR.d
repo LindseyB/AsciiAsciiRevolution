@@ -74,8 +74,8 @@ void drawLevelScreen() {
 	while(levelS._playing){
 		clear();
 		levelS.draw();
-		Thread.sleep(0.05);
-		//Thread.sleep(levelS._arrowSect.sleep);
+		//Thread.sleep(0.05);
+		Thread.sleep(levelS._arrowSect.sleep);
 		refresh();
 	}
 	
