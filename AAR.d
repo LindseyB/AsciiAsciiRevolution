@@ -18,13 +18,10 @@ WINDOW* win;
 Level currentLevel;
 SelectScreen selectS;
 LevelScreen levelS;
+SoundClip sc;
 
 void main(){
 	selectS = new SelectScreen("levels.txt");
-	/*SoundClip sc = new SoundClip("music/ID__Baobinga_-_10_-_Raise_Riddim.mp3");
-	sc.start();
-	Thread.sleep(5);
-	sc.stop();*/
 	
 	win = initscr();
 	noecho();
@@ -49,23 +46,28 @@ void main(){
 	AnimatedAsciiSprite narwhal = new AnimatedAsciiSprite("graphics/man-moonwalk.txt", win, true, 16, 9);	
 	AsciiSprite light = new AsciiSprite("graphics/spotlight.txt", win, false, 0, 5);
 
-	if(!levelInput(selectS, win)){goto ragequite;}
+	if(!levelInput(selectS, win)){endwin();}
 	
-	currentLevel = selectS._levels[selectS._levelSelected];
+	currentLevel = selectS._levels[selectS._selectedLevel];
 	levelS = new LevelScreen(currentLevel._name);
 
 	drawLevelScreen();
 
- ragequite:
 	endwin();
 }
 
 void drawLevelScreen() {
 	clear();
-	
+
+	sc = new SoundClip("music/" ~ currentLevel._audio);
+	sc.start();	
+
 	while(levelS._playing){
 		levelS.draw();
 		Thread.sleep(0.3);
 		refresh();
 	}
+	
+	sc.stop();
+
 }
