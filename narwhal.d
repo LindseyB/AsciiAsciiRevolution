@@ -12,8 +12,8 @@ class Narwhal {
 
 	this() {
 		// init animations
-		_animations[Animate.BREAKDANCE] = new AnimatedAsciiSprite("graphics/narwhal-breakdance.txt", null, true, 10, 5);
-		_animations[Animate.DANCE] = new AnimatedAsciiSprite("graphics/narwhal-dance.txt", null, true, 10, 5);
+		_animations[Animate.BREAKDANCE] = new AnimatedAsciiSprite("graphics/narwhal-breakdance.txt", null, true, true, 10, 5);
+		_animations[Animate.DANCE] = new AnimatedAsciiSprite("graphics/narwhal-dance.txt", null, true, true, 10, 5);
 	}
 
 	void setCurAnimation(Animate animation) {

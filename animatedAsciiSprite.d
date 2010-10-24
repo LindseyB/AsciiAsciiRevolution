@@ -9,15 +9,19 @@ import asciiSprite;
 class AnimatedAsciiSprite : AsciiSprite {
 	char[][][] _animation;
 	int _frame;
+	bool _loop;
+	bool _animate;
 
-	this(char[] filePath, WINDOW* win, bool transparent = false, int x=0, int y=0){
+	this(char[] filePath, WINDOW* win, bool transparent, bool loop, int x=0, int y=0){
 		_frame = 0;
 		auto _spriteFile = new TextFileInput(filePath);
 		super._x = x;
 		super._y = y;
 		super._win = win;
 		super._transparent = transparent;
-		
+		_animate = true;
+		_loop = loop;
+
 		bool firstLine = true;
 		char[][] newFrame;
 
@@ -39,13 +43,21 @@ class AnimatedAsciiSprite : AsciiSprite {
 		}
 
 		_animation ~= newFrame;
+		
 
 		super._sprite = _animation[0];
 	}
 
 	void nextFrame() {
-		_frame++;
-		_frame %= _animation.length;
-		super._sprite = _animation[_frame];
+		if(_animate){
+				int before = ++_frame;
+				_frame %= _animation.length;
+				
+				if(!_loop && before == _animation.length && _frame == 0){
+					_animate = false;
+				}
+
+				super._sprite = _animation[_frame];
+		}
 	}
 }
