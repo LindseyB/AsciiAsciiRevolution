@@ -44,7 +44,7 @@ class LevelScreen {
 		_score.setScore((-50*_arrowSect.misses) + (100*_arrowSect.good) + (200*_arrowSect.great)); 
 		_warningBar.updateWarningBar(_arrowSect.misses, _arrowSect.great);
 
-		if(_warningBar._level >= 32 && _arrowSect.misses > 5){
+		if(_warningBar._level >= 32 && _arrowSect.misses > 10){
 			endGame(false);
 		}
 
