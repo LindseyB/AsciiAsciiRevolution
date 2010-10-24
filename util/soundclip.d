@@ -3,7 +3,7 @@ module util.soundclip;
 import tango.stdc.posix.unistd;
 import tango.stdc.posix.signal;
 import tango.stdc.stringz;
-import tango.std.posix.stdlib;
+//import tango.std.posix.stdlib;
 
 class SoundClip{
 private:
