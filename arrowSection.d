@@ -68,10 +68,10 @@ class ArrowSection {
 
 		if(!fast){	
 			// XXX: atomic swap on _input
-			ubyte diff, cacheInput = _input; 
-			_input = 0;
+			ubyte diff, cacheInput;// = _input; 
+			//_input = 0;
 
-			//llvm_atomic_swap(&_input, cacheInput);
+			cacheInput = llvm_atomic_swap!(ubyte)(&_input, 0);
 
 			//cacheInput = _input;
 			//_input = 0;
