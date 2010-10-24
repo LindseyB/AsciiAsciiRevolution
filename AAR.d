@@ -94,8 +94,10 @@ void drawLevelScreen() {
 	}
 	
 	sc.stop();
-
-	Thread.sleep(5);
+	
+	if(!userquit){
+		Thread.sleep(5);
+	}
 	clear();
 	refresh();
 
