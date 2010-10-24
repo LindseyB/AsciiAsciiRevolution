@@ -23,28 +23,34 @@ void main(){
 	cbreak();
 	start_color();
 	curs_set(0);
-
-	message = newwin(2,80,0,0);
-
-	wprintw(message, " Welcome to ASCII ASCII Revolution! ");
-	wrefresh(message);
-	
-	AsciiSprite logo = new AsciiSprite("graphics/logo.txt");	
-	logo.drawSprite(win);
 	
 	clear();
+	refresh();
+	AsciiSprite logo = new AsciiSprite("graphics/logo.txt", win);	
+	logo.drawSprite();
+	refresh();
+clear();
+	refresh();
+	logo.drawSprite();
+	refresh();
 
-	AnimatedAsciiSprite narwhal = new AnimatedAsciiSprite("graphics/narwhal-dance.txt");
 
+	Thread.sleep(5);
+
+
+	AnimatedAsciiSprite narwhal = new AnimatedAsciiSprite("graphics/narwhal-dance.txt", win);
+	
 	// game loop
-	while(1){
+	for(int i=0; i<5; i++){
 		clear();
 		refresh();
-		narwhal.drawSprite(win);
+		narwhal.drawSprite();
 		narwhal.nextFrame();
 		refresh();
 		Thread.sleep(1);
 	}
+
+	endwin();
 }
 
 
