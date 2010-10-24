@@ -103,7 +103,7 @@ class ArrowSection {
 
 				char[] line = chartFile.next;
 
-				if(line is null){noMoreBeats = true;}
+				if(line is null){beat.end = true;}
 
 				foreach(ch; line){
 					switch(ch){
@@ -123,6 +123,8 @@ class ArrowSection {
 					
 					misses += lut[misses];
 					
+					if(beat[0].end){noMoreBeats = true;}
+
 					beats = beats[1..$];
 				}
 			}
@@ -180,6 +182,7 @@ private:
 }
 
 struct Beat{
+	bool end;
 	ubyte arrows;	//lrud
 	ubyte inputs;
 	double period;
