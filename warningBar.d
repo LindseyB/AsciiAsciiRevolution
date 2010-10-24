@@ -13,6 +13,10 @@ class WarningBar {
 
 	void updateWarningBar(int misses, int successes){
 		_level += misses - successes;
+
+		if(_level > 32){
+			_level = 32;
+		}
 	}
 
 	void draw() {
