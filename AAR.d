@@ -13,33 +13,44 @@ WINDOW* win;
 WINDOW* message;
 
 void main(){
-	SoundClip sc = new SoundClip("music/ID__Baobinga_-_10_-_Raise_Riddim.mp3");
+	/*SoundClip sc = new SoundClip("music/ID__Baobinga_-_10_-_Raise_Riddim.mp3");
 	sc.start();
-	Stdout("started playing\n")();
 	Thread.sleep(5);
-	Stdout("done with sleep\n")();
-	Stdout.format("{}\n", sc.pause())();
-	Thread.sleep(5);
-	Stdout.format("{}\n", sc.unpause())();
-	Thread.sleep(5);
-	Stdout.format("{}\n", sc.stop())();
+	sc.stop();*/
 	
-	initscr();
+	win = initscr();
 	noecho();
 	cbreak();
 	start_color();
 	curs_set(0);
+	
+	clear();
+	refresh();
+	AsciiSprite logo = new AsciiSprite("graphics/logo.txt", win);	
+	logo.drawSprite();
+	refresh();
+clear();
+	refresh();
+	logo.drawSprite();
+	refresh();
 
-	win = newwin(34,127,0,0);
-	message = newwin(2,80,0,0);
 
-	wprintw(message, " Welcome to ASCII ASCII Revolution! ");
-	wrefresh(message);
+	Thread.sleep(5);
 
+
+	AnimatedAsciiSprite narwhal = new AnimatedAsciiSprite("graphics/narwhal-dance.txt", win);
+	
 	// game loop
-	while(1){
-		
+	for(int i=0; i<5; i++){
+		clear();
+		refresh();
+		narwhal.drawSprite();
+		narwhal.nextFrame();
+		refresh();
+		Thread.sleep(1);
 	}
+
+	endwin();
 }
 
 

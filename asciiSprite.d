@@ -1,17 +1,18 @@
 module asciiSprite;
 
 import tango.stdc.stringz;
-import ncurses;
+public import ncurses;
 import tango.io.Stdout;
 import tango.io.stream.TextFile;
 
-class asciiSprite {
+class AsciiSprite {
 	int _x, _y;
 	char[][] _sprite;
+	WINDOW* _win;
 
 	this(){}
 
-	this(char[] filePath, int x=0, int y=0) {
+	this(char[] filePath, WINDOW* win, int x=0, int y=0) {
 		auto _spriteFile = new TextFileInput(filePath);
 		_x = x;
 		_y = y;
@@ -29,18 +30,15 @@ class asciiSprite {
 		_y = y;
 	}
 	
-	void drawSprite(WINDOW* win) {
-		werase(win);
-
+	void drawSprite() {
 		int y = _y;
-		
+				
 		foreach(line; _sprite){
-			setsyx(y,_x);
-			wprintw(win,toStringz(line));
+			move(y,_x);
+			addstr(toStringz(line));
 			y++;
 		}
 
-		wrefresh(win);
 	}
 
 }
