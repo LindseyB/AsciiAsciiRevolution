@@ -2,6 +2,7 @@ module animatedAsciiSprite;
 
 import tango.io.Stdout;
 import tango.io.stream.TextFile;
+import tango.text.Util;
 
 import asciiSprite;
 
@@ -21,10 +22,10 @@ class AnimatedAsciiSprite : AsciiSprite {
 		char[][] newFrame;
 
 		foreach(line; _spriteFile){
-			if(line == "%"){
+			if(contains(line, '%')){
 				firstLine = true;
 			} else {
-				if(firstLine == true){
+				if(firstLine){
 					if(newFrame !is null){
 						_animation ~= newFrame;
 					}
