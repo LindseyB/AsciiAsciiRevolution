@@ -48,6 +48,7 @@ void main(){
 	while(1){
 		clear();
 		screen.drawScreen();
+		Thread.sleep(1);
 		refresh();
 	}
 

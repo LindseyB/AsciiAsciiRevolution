@@ -12,6 +12,21 @@ class AsciiSprite {
 	WINDOW* _win;
 
 	this(){}
+	
+	this(char[] filePath){
+		auto _spriteFile = new TextFileInput(filePath);
+		_x = 0;
+		_y = 0;
+		_transparent = false;
+
+		foreach(line; _spriteFile){
+			_sprite ~= line;
+		}
+
+		_spriteFile.close();
+
+
+	}
 
 	this(char[] filePath, WINDOW* win, bool transparent = false, int x=0, int y=0) {
 		auto _spriteFile = new TextFileInput(filePath);
