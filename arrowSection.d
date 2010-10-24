@@ -24,7 +24,7 @@ class ArrowSection {
 
 	TextFileInput chartFile;
 
-	int misses, ok, good, great;
+	int misses, good, great;
 	
 	this(char[] arrowFile) {
 		chartFile = new TextFileInput("arrow_charts/" ~ arrowFile);
@@ -38,6 +38,9 @@ class ArrowSection {
 			_exit(1);
 		}
 
+		// burn the second line -- how long the song is
+		bpm = chartFile.next;
+		
 		_frame = new AsciiSprite("graphics/arrow-frame.txt", null, true, 60, 0);
 		hit = new AsciiSprite("graphics/hit_it_now_bar.txt", null, true, 62, 5);
 
@@ -58,50 +61,74 @@ class ArrowSection {
 		hit.drawSprite();
 
 		if(!fast){	
-			
+			// XXX: atomic swap on _input
+			ubyte diff, cacheInput = _input;
+			_input = 0;
 
+			if(offset > 1){
+				//beats[0] arrows - inputs
+				diff = beats[0].arrows & (~beats[0].inputs);
+				
+				// diff & _input
+				diff &= cacheInput;
+				good += lut[diff];
+
+
+				// mark as not missed
+				beats[0].inputs |= diff;
+			}
+
+			if(offset > 3){
+				// _input - diff ==> inputs that counted above don't count twice
+				ubyte diff2 = cacheInput & (~diff);
+				
+				// diff2 & beats[1].arrows
+				diff2 &= beats[1].arrows;
+				
 				if(offset == 0){
-					// parse shite frum file, appendto arrows and drop top if required
-					Beat* beat = new Beat;
-
-					char[] line = chartFile.next;
-
-					foreach(ch; line){
-						switch(ch){
-						case 'l': beat.arrows |= 1; break;
-						case 'r': beat.arrows |= 2; break;
-						case 'u': beat.arrows |= 4; break;
-						case 'd': beat.arrows |= 8; break;
-						case 'x': beat.arrows |= randomArrow(); break;
-						}
-					}
-					
-					//beat.arrows = randomArrows();
-					//beat.period = .1;
-
-					beats ~= beat;
-
-					if(beats.length > beatsOnScreen){
-						// score Misses on dis
-						ubyte misses = beats[0].arrows ^ beats[0].inputs;
-
-						misses += lut[misses];
-						
-						beats = beats[1..$];
-					}
-
-					/*if(beats[0].period != 0){
-						sleep = beats[0].period;
-						}*/
+					// beat[1] is on target at offset 0
+					great += lut[diff2];
+				}else{
+					good += lut[diff2];
 				}
 
-				offset--;
-				if(offset < 0){offset = 4;}
+				beats[1].inputs |= diff2;
+			}
+
+			if(offset == 0){
+				// parse shite frum file, appendto arrows and drop top if required
+				Beat* beat = new Beat;
+
+				char[] line = chartFile.next;
+
+				foreach(ch; line){
+					switch(ch){
+					case 'l': beat.arrows |= 1; break;
+					case 'r': beat.arrows |= 2; break;
+					case 'u': beat.arrows |= 4; break;
+					case 'd': beat.arrows |= 8; break;
+					case 'x': beat.arrows |= randomArrow(); break;
+					}
+				}
+					
+				beats ~= beat;
+					
+				if(beats.length > beatsOnScreen){
+					// score Misses on dis
+					misses = beats[0].arrows & (~beats[0].inputs);
+					
+					misses += lut[misses];
+					
+					beats = beats[1..$];
+				}
+			}
+
+			offset--;
+			if(offset < 0){offset = 4;}
 		}
 
 		// Draw
 		for(int i = 0; i < beats.length; i++){
-
 			ubyte arrows = beats[i].arrows;
 
 			int row = 1 + offset + 5*i;
