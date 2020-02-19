@@ -1,4 +1,4 @@
-
+```
       ___   _____ _____   o    o      ___   _____ _____   o    o    
      / _ \ /  ___/  __ \ ooo  ooo    / _ \ /  ___/  __ \ ooo  ooo
     / /_\ \\ `--.| /  \/ ooo  ooo   / /_\ \\ `--.| /  \/ ooo  ooo
@@ -34,5 +34,6 @@ _______\____\  \____/_______        || .|| 0 ||. ||   || .|| 0 ||. ||
                             |       || . /   \ . ||   || . /   \ . ||
 
                         -= A game for OSGCC 4 =-
+```
 
 [Gameplay Video](https://www.youtube.com/watch?v=Fil-LXC9CRA)
